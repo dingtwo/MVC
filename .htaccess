@@ -1,0 +1,16 @@
+RewriteEngine on
+RewriteBase /0503/MVC/
+DirectoryIndex /0503/MVC/View/detail.php
+#ErrorDocument 404 /0503/MVC/error.html
+#重定向
+#RewriteRule ^([a-zA-Z0-9]+)/([0-9]+)\.html$ api.php?action=$1&id=$2 [NC]
+#所有php重定向
+RewriteRule ^(.+)\.php$ route.php [NC]
+#将所有其他URL都重定位
+RewriteRule ^route.php$ - [L]
+#不作为文件解析
+RewriteCond %{REQUEST_FILENAME} !-f
+#不作为目录解析
+RewriteCond %{REQUEST_FILENAME} !-d
+#全部重定向到route.php文件中
+RewriteRule . route.php [L]
